@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Portfolio — The New Future Legend</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0D1117;
+            --surface: #161B22;
+            --teal: #00E5D8;
+            --teal-hover: #00CBBF;
+            --sand: #D6B98A;
+            --white: #FFFFFF;
+            --gray: #B8C1CC;
+            --border: #2A2F36;
+            --glow: 0 0 30px rgba(0, 229, 216, 0.18);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            --radius-card: 18px;
+            --radius-btn: 14px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--gray);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        /* ── CUSTOM CURSOR ── */
+        .cursor {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            background: var(--teal);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform .15s ease, width .2s, height .2s, opacity .2s;
+            mix-blend-mode: screen;
+        }
+
+        .cursor-ring {
+            position: fixed;
+            width: 36px;
+            height: 36px;
+            border: 1.5px solid rgba(0, 229, 216, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: transform .35s ease, width .3s, height .3s;
+        }
+
+        /* ── NAVBAR ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 900;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 60px;
+            background: rgba(13, 17, 23, 0.65);
+            backdrop-filter: blur(18px) saturate(160%);
+            border-bottom: 1px solid rgba(42, 47, 54, 0.5);
+            transition: padding .3s;
+        }
+
+        nav.scrolled {
+            padding: 14px 60px;
+        }
+
+        .nav-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 26px;
+            letter-spacing: 3px;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .nav-logo span {
+            color: var(--teal);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: .5px;
+            position: relative;
+            transition: color .25s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--teal);
+            border-radius: 2px;
+            transition: width .25s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--teal);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 10px 24px;
+            background: var(--teal);
+            color: var(--bg);
+            border-radius: var(--radius-btn);
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background .25s, box-shadow .25s;
+        }
+
+        .nav-cta:hover {
+            background: var(--teal-hover);
+            box-shadow: var(--glow);
+        }
+
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .nav-hamburger span {
+            width: 24px;
+            height: 2px;
+            background: var(--white);
+            border-radius: 2px;
+            transition: .3s;
+        }
+
+        /* ── HERO ── */
+        .projects-hero {
+            padding: 200px 60px 80px;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(0, 229, 216, 0.05) 0%, transparent 70%);
+        }
+
+        .projects-hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(60px, 8vw, 120px);
+            color: var(--white);
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .projects-hero h1 span {
+            color: var(--teal);
+        }
+
+        .projects-hero p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 18px;
+            color: var(--gray);
+        }
+
+        /* ── FILTER ── */
+        .filter-container {
+            padding: 40px 60px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            padding: 10px 24px;
+            border-radius: 99px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--gray);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            border-color: var(--teal);
+            color: var(--teal);
+            background: rgba(0, 229, 216, 0.06);
+        }
+
+        /* ── GRID ── */
+        .projects-grid {
+            padding: 0 60px 100px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--surface);
+            border-radius: var(--radius-card);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--teal);
+            box-shadow: var(--card-shadow), var(--glow);
+        }
+
+        .project-img {
+            aspect-ratio: 16/10;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .project-img svg {
+            width: 80%;
+            height: 80%;
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--teal);
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .project-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .project-content p {
+            font-size: 14px;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 12px;
+            color: var(--sand);
+        }
+
+        .project-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ── PROCESS ── */
+        .process-track {
+            display: flex;
+            gap: 0;
+            position: relative;
+            margin-top: 72px;
+        }
+
+        .process-track::before {
+            content: '';
+            position: absolute;
+            top: 36px;
+            left: 5%;
+            right: 5%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), var(--teal), var(--border), transparent);
+        }
+
+        .process-step {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .process-dot {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            margin-bottom: 28px;
+            transition: border-color .3s, box-shadow .3s;
+        }
+
+        .process-step:hover .process-dot {
+            border-color: var(--teal);
+            box-shadow: var(--glow);
+        }
+
+        .process-dot svg {
+            width: 26px;
+            height: 26px;
+            stroke: var(--teal);
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .process-step-num {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 22px;
+            height: 22px;
+            background: var(--teal);
+            color: var(--bg);
+            border-radius: 50%;
+            font-size: 10px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .process-step h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .process-step p {
+            font-size: 13.5px;
+            color: var(--gray);
+            line-height: 1.65;
+        }
+
+        /* ── METRICS BAND ── */
+        .metrics-band {
+            background: linear-gradient(135deg, rgba(0, 229, 216, 0.08), rgba(214, 185, 138, 0.05));
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 100px 60px;
+            margin-top: 100px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+
+        .metric-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 72px;
+            line-height: 1;
+            color: var(--white);
+        }
+
+        .metric-num span {
+            color: var(--teal);
+        }
+
+        .metric-label {
+            font-size: 14px;
+            color: var(--gray);
+            margin-top: 8px;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+        }
+
+        .metric-sub {
+            font-size: 12px;
+            color: var(--sand);
+            margin-top: 6px;
+        }
+
+        /* ── CTA SECTION ── */
+        .cta-section {
+            padding: 140px 60px;
+            text-align: center;
+            background: radial-gradient(circle at bottom, rgba(0, 229, 216, 0.08) 0%, transparent 70%);
+        }
+
+        .cta-box {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 80px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 229, 216, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 16px 40px;
+            background: var(--teal);
+            color: var(--bg);
+            border-radius: var(--radius-btn);
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 30px;
+        }
+
+        .btn-primary:hover {
+            background: var(--teal-hover);
+            box-shadow: var(--glow);
+            transform: translateY(-2px);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 80px 60px 40px;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            letter-spacing: 3px;
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        .footer-logo span {
+            color: var(--teal);
+        }
+
+        .footer-tagline {
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.7;
+            max-width: 280px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .footer-social a {
+            width: 38px;
+            height: 38px;
+            background: rgba(0, 229, 216, 0.06);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: border-color .2s, background .2s, transform .2s;
+        }
+
+        .footer-social a:hover {
+            border-color: var(--teal);
+            background: rgba(0, 229, 216, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .footer-social svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--teal) !important;
+            fill: none !important;
+            stroke-width: 2;
+        }
+
+        .footer-col h4 {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-col a {
+            font-size: 14px;
+            color: var(--gray);
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .footer-col a:hover {
+            color: var(--teal);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-copy {
+            font-size: 13px;
+            color: var(--gray);
+        }
+
+        .footer-copy span {
+            color: var(--teal);
+        }
+
+        .footer-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--gray);
+            background: rgba(0, 229, 216, 0.06);
+            border: 1px solid rgba(0, 229, 216, 0.15);
+            border-radius: 99px;
+            padding: 6px 16px;
+        }
+
+        .footer-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--teal);
+            border-radius: 50%;
+            animation: pulse-ring 2s infinite;
+        }
+
+        @keyframes pulse-ring {
+
+            0%,
+            100% {
+                opacity: .5;
+                transform: scale(1)
+            }
+
+            50% {
+                opacity: .2;
+                transform: scale(1.12)
+            }
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1200px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            nav {
+                padding: 15px 30px;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                right: auto;
+                width: min(300px, 100%);
+                height: 100vh;
+                background: var(--surface);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding: 120px 40px 40px;
+                gap: 30px;
+                transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                border-right: 1px solid var(--border);
+                z-index: 999;
+                display: flex;
+                box-shadow: 20px 0 40px rgba(0, 0, 0, 0.5);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li { width: 100%; }
+            .nav-links a {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                font-size: 18px;
+                width: 100%;
+                padding: 10px 0;
+            }
+            .nav-links a i {
+                width: 24px;
+                color: var(--teal);
+                font-size: 16px;
+            }
+
+            .nav-hamburger {
+                display: flex;
+            }
+
+            .nav-hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .nav-hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .nav-hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            .nav-cta {
+                display: none;
+            }
+
+            .process-track {
+                flex-direction: column;
+                gap: 48px;
+                padding: 0 20px;
+            }
+
+            .process-track::before {
+                display: none;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .projects-hero {
+                padding: 160px 20px 60px;
+            }
+
+            .projects-hero h1 {
+                font-size: 56px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                padding: 0 20px 60px;
+            }
+
+            .filter-container {
+                padding: 20px;
+                gap: 10px;
+            }
+
+            .filter-btn {
+                padding: 8px 18px;
+                font-size: 13px;
+            }
+
+            .metrics-band {
+                padding: 60px 20px;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .metric-num {
+                font-size: 60px;
+            }
+
+            .cta-section {
+                padding: 80px 20px;
+            }
+
+            .cta-box {
+                padding: 60px 24px;
+            }
+
+            .cta-box h2 {
+                font-size: 36px;
+            }
+
+            footer {
+                padding: 60px 20px 30px;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-brand {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-social {
+                justify-content: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* ── UTILS ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- CURSOR -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- NAVBAR -->
+    <nav id="navbar">
+        <a href="index.html" class="nav-logo">THE NEW<span>FUTURE</span>LEGEND</a>
+        <ul class="nav-links">
+            <li><a href="index.html#services"><i class="fas fa-hammer"></i> Services</a></li>
+            <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="projects.html" class="active"><i class="fas fa-hard-hat"></i> Projects</a></li>
+            <li><a href="team.html"><i class="fas fa-users-cog"></i> Team</a></li>
+            <li><a href="contact.html"><i class="fas fa-phone-alt"></i> Contact</a></li>
+        </ul>
+        <a href="contact.html" class="nav-cta">Get a Quote</a>
+        <div class="nav-hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="projects-hero">
+        <div class="reveal">
+            <h1
+                style="font-family:'Bebas Neue'; color:var(--sand); font-size:14px; letter-spacing:4px; margin-bottom:15px; text-transform:uppercase;">
+                Portfolio</h1>
+            <h1>Landmarks of <span>Distinction</span></h1>
+            <p>From towering commercial complexes to intimate luxury residences, explore our legacy of precision
+                building across the Sultanate of Oman.</p>
+        </div>
+    </header>
+
+    <!-- FILTER -->
+    <div class="filter-container reveal">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="commercial">Commercial</button>
+        <button class="filter-btn" data-filter="residential">Residential</button>
+        <button class="filter-btn" data-filter="infrastructure">Infrastructure</button>
+    </div>
+
+    <!-- GRID -->
+    <section class="projects-grid">
+        <!-- Project 1 -->
+        <div class="project-card reveal" data-category="commercial">
+            <div class="project-img">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="150" y="50" width="100" height="200" fill="var(--surface)" stroke="var(--teal)"
+                        stroke-width="1" />
+                    <g fill="var(--teal)" opacity="0.2">
+                        <rect x="160" y="65" width="20" height="15" />
+                        <rect x="190" y="65" width="20" height="15" />
+                        <rect x="220" y="65" width="20" height="15" />
+                        <rect x="160" y="90" width="20" height="15" />
+                        <rect x="190" y="90" width="20" height="15" />
+                    </g>
+                </svg>
+            </div>
+            <div class="project-content">
+                <span class="project-tag">Commercial</span>
+                <h3>Nexus Tower Muscat</h3>
+                <p>A 42-story architectural marvel featuring intelligent climate control and Grade-A office spaces.</p>
+                <div class="project-meta">
+                    <span><i class="fas fa-map-marker-alt"></i> Muscat, Oman</span>
+                    <span><i class="fas fa-calendar-alt"></i> 2023</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card reveal" data-category="residential">
+            <div class="project-img">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100 250 L100 150 L200 100 L300 150 L300 250 Z" fill="var(--surface)" stroke="var(--sand)"
+                        stroke-width="1" />
+                    <rect x="180" y="180" width="40" height="70" fill="var(--sand)" opacity="0.2" />
+                </svg>
+            </div>
+            <div class="project-content">
+                <span class="project-tag">Residential</span>
+                <h3>Aura Waterfront Villas</h3>
+                <p>Ultra-luxury coastal residences at Al Mouj Muscat, defining the pinnacle of Omani luxury living.</p>
+                <div class="project-meta">
+                    <span><i class="fas fa-map-marker-alt"></i> Al Mouj, Muscat</span>
+                    <span><i class="fas fa-calendar-alt"></i> 2022</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card reveal" data-category="infrastructure">
+            <div class="project-img">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 200 Q200 100 350 200" fill="none" stroke="var(--teal)" stroke-width="4" />
+                    <line x1="50" y1="200" x2="350" y2="200" stroke="var(--border)" stroke-width="10" />
+                </svg>
+            </div>
+            <div class="project-content">
+                <span class="project-tag">Infrastructure</span>
+                <h3>Meridian Bridge Duqm</h3>
+                <p>Strategic infrastructure connecting key economic zones with heavy-load engineering excellence.</p>
+                <div class="project-meta">
+                    <span><i class="fas fa-map-marker-alt"></i> Duqm, Oman</span>
+                    <span><i class="fas fa-calendar-alt"></i> 2021</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="project-card reveal" data-category="commercial">
+            <div class="project-img">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="100" y="100" width="200" height="150" fill="var(--surface)" stroke="var(--white)"
+                        stroke-width="1" />
+                    <rect x="140" y="100" width="20" height="150" fill="var(--teal)" opacity="0.1" />
+                    <rect x="240" y="100" width="20" height="150" fill="var(--teal)" opacity="0.1" />
+                </svg>
+            </div>
+            <div class="project-content">
+                <span class="project-tag">Commercial</span>
+                <h3>Muscat Grand Extension</h3>
+                <p>A sophisticated 15,000 sqm retail expansion featuring premium global brand outlets.</p>
+                <div class="project-meta">
+                    <span><i class="fas fa-map-marker-alt"></i> Muscat, Oman</span>
+                    <span><i class="fas fa-calendar-alt"></i> 2023</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="project-card reveal" data-category="residential">
+            <div class="project-img">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="120" y="80" width="160" height="170" fill="var(--surface)" stroke="var(--sand)"
+                        stroke-width="1" rx="10" />
+                    <circle cx="200" cy="120" r="20" fill="var(--sand)" opacity="0.2" />
+                </svg>
+            </div>
+            <div class="project-content">
+                <span class="project-tag">Residential</span>
+                <h3>Barka Eco-Resort</h3>
+                <p>Sustainable luxury housing integrated with natural landscapes, using 100% solar power.</p>
+                <div class="project-meta">
+                    <span><i class="fas fa-map-marker-alt"></i> Barka, Oman</span>
+                    <span><i class="fas fa-calendar-alt"></i> 2022</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project 6 -->
+        <div class="project-card reveal" data-category="infrastructure">
+            <div class="project-img">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="50" y="120" width="300" height="100" fill="var(--surface)" stroke="var(--teal)"
+                        stroke-width="1" rx="5" />
+                    <line x1="50" y1="170" x2="350" y2="170" stroke="var(--teal)" stroke-dasharray="10,5"
+                        opacity="0.3" />
+                </svg>
+            </div>
+            <div class="project-content">
+                <span class="project-tag">Infrastructure</span>
+                <h3>Duqm Logistics Hub</h3>
+                <p>Massive 50,000 sqm warehouse and distribution center with automated tracking systems.</p>
+                <div class="project-meta">
+                    <span><i class="fas fa-map-marker-alt"></i> Duqm, Oman</span>
+                    <span><i class="fas fa-calendar-alt"></i> 2020</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section style="padding: 100px 60px;">
+        <div style="text-align:center;">
+            <div class="section-tag reveal" style="justify-content:center">Our Methodology</div>
+            <h2 style="font-family:'Playfair Display'; font-size:44px; color:var(--white); margin-bottom:20px;">Mastery
+                in <span>Motion</span></h2>
+            <p style="max-width:700px; margin: 0 auto; color:var(--gray);">A transparent, high-precision workflow
+                designed to deliver absolute excellence from initial concept to the final ribbon cutting.</p>
+        </div>
+
+        <div class="process-track reveal stagger">
+            <!-- Step 1 -->
+            <div class="process-step">
+                <div class="process-dot">
+                    <div class="process-step-num">1</div>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8" />
+                    </svg>
+                </div>
+                <h3>Vision Discovery</h3>
+                <p>We deep dive into your requirements, site analysis, and project goals to form a rock-solid blueprint.
+                </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="process-step">
+                <div class="process-dot">
+                    <div class="process-step-num">2</div>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M2 12h2M20 12h2M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M17.66 6.34l-1.41 1.41M6.34 17.66l-1.41 1.41" />
+                        <circle cx="12" cy="12" r="5" />
+                    </svg>
+                </div>
+                <h3>Precision Design</h3>
+                <p>Advanced architectural modelling and engineering ensured for both structural integrity and
+                    aesthetics.</p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="process-step">
+                <div class="process-dot">
+                    <div class="process-step-num">3</div>
+                    <svg viewBox="0 0 24 24">
+                        <path d="M3 21h18M3 7l9-4 9 4M4 21V7M20 21V7M9 21v-4h6v4" />
+                    </svg>
+                </div>
+                <h3>Execution Phase</h3>
+                <p>Industry-leading construction standards using premium materials and a highly skilled expert
+                    workforce.</p>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="process-step">
+                <div class="process-dot">
+                    <div class="process-step-num">4</div>
+                    <svg viewBox="0 0 24 24">
+                        <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                        <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                </div>
+                <h3>Quality Assurance</h3>
+                <p>Rigorous multi-point inspections and third-party audits ensure zero-compromise safety and finishes.
+                </p>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="process-step">
+                <div class="process-dot">
+                    <div class="process-step-num">5</div>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+                    </svg>
+                </div>
+                <h3>Handover & Beyond</h3>
+                <p>White-glove project delivery with comprehensive documentation and long-term structural warranty.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- METRICS -->
+    <div class="metrics-band">
+        <div class="metrics-grid reveal stagger">
+            <div>
+                <div class="metric-num">500<span>+</span></div>
+                <div class="metric-label">Projects Completed</div>
+                <div class="metric-sub">Across the Sultanate</div>
+            </div>
+            <div>
+                <div class="metric-num">14<span>yr</span></div>
+                <div class="metric-label">Experience</div>
+                <div class="metric-sub">Since 2010</div>
+            </div>
+            <div>
+                <div class="metric-num">98<span>%</span></div>
+                <div class="metric-label">Client Satisfaction</div>
+                <div class="metric-sub">Based on 2023 audits</div>
+            </div>
+            <div>
+                <div class="metric-num">1200<span>+</span></div>
+                <div class="metric-label">Expert Staff</div>
+                <div class="metric-sub">Highly skilled builders</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="cta-box reveal">
+            <div class="section-tag" style="justify-content:center;">Ready to build?</div>
+            <h2 style="font-family:'Playfair Display'; font-size:48px; color:var(--white); margin-top:20px;">Let's Bring
+                Your <span>Vision</span> to Life</h2>
+            <p style="max-width:600px; margin: 20px auto 0; color:var(--gray);">Whether it's a luxury residence or a
+                commercial landmark, we have the expertise to build your future.</p>
+            <a href="contact.html" class="btn-primary">Start Your Inquiry</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="footer-logo">THE NEW <span>FUTURE</span> LEGEND</div>
+                <p class="footer-tagline">Building tomorrow's landmarks with today's precision. Premium construction
+                    since 2010.</p>
+                <div class="footer-social">
+                    <a href="#"><svg viewBox="0 0 24 24">
+                            <path
+                                d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg></a>
+                    <a href="#"><svg viewBox="0 0 24 24">
+                            <path
+                                d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
+                        </svg></a>
+                    <a href="#"><svg viewBox="0 0 24 24">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                        </svg></a>
+                    <a href="#"><svg viewBox="0 0 24 24">
+                            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+                        </svg></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="commercial.html">Commercial Construction</a></li>
+                    <li><a href="residential.html">Residential Projects</a></li>
+                    <li><a href="infrastructure.html">Infrastructure</a></li>
+                    <li><a href="smart-buildings.html">Smart Buildings</a></li>
+                    <li><a href="renovation.html">Renovation</a></li>
+                    <li><a href="consulting.html">Consulting</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="team.html">Our Team</a></li>
+                    <li><a href="projects.html">Portfolio</a></li>
+                    <li><a href="sustainability.html">Sustainability</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html">Terms of Service</a></li>
+                    <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                    <li><a href="compliance.html">Compliance</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="footer-copy">© 2024 <span>The New Future Legend</span>. All rights reserved.</p>
+            <div class="footer-badge">Licensed & Certified Builder</div>
+        </div>
+    </footer>
+
+    <script>
+        // CURSOR
+        const cursor = document.getElementById('cursor');
+        const cursorRing = document.getElementById('cursorRing');
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+            cursor.style.left = x + 'px';
+            cursor.style.top = y + 'px';
+            cursorRing.style.left = x + 'px';
+            cursorRing.style.top = y + 'px';
+        });
+
+        // NAVBAR SCROLL
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        // MOBILE MENU
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
+        });
+
+        // REVEAL ON SCROLL
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // FILTER LOGIC
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.dataset.filter;
+
+                cards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block';
+                        setTimeout(() => card.style.opacity = '1', 10);
+                    } else {
+                        card.style.opacity = '0';
+                        setTimeout(() => card.style.display = 'none', 300);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

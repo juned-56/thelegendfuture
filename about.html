@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us — The New Future Legend</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #0D1117;
+            --surface: #161B22;
+            --teal: #00E5D8;
+            --teal-hover: #00CBBF;
+            --sand: #D6B98A;
+            --white: #FFFFFF;
+            --gray: #B8C1CC;
+            --border: #2A2F36;
+            --glow: 0 0 30px rgba(0, 229, 216, 0.18);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            --radius-card: 18px;
+            --radius-btn: 14px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--gray);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        /* ── SCROLLBAR ── */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--teal);
+            border-radius: 99px;
+        }
+
+        /* ── CUSTOM CURSOR ── */
+        .cursor {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            background: var(--teal);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform .15s ease, width .2s, height .2s, opacity .2s;
+            mix-blend-mode: screen;
+        }
+
+        .cursor-ring {
+            position: fixed;
+            width: 36px;
+            height: 36px;
+            border: 1.5px solid rgba(0, 229, 216, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: transform .35s ease, width .3s, height .3s;
+        }
+
+        body:hover .cursor {
+            opacity: 1;
+        }
+
+        /* ── NAVBAR ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 900;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 60px;
+            background: rgba(13, 17, 23, 0.65);
+            backdrop-filter: blur(18px) saturate(160%);
+            border-bottom: 1px solid rgba(42, 47, 54, 0.5);
+            transition: padding .3s;
+        }
+
+        nav.scrolled {
+            padding: 14px 60px;
+        }
+
+        .nav-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 26px;
+            letter-spacing: 3px;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .nav-logo span {
+            color: var(--teal);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: .5px;
+            position: relative;
+            transition: color .25s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--teal);
+            border-radius: 2px;
+            transition: width .25s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--teal);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 10px 24px;
+            background: var(--teal);
+            color: var(--bg);
+            border-radius: var(--radius-btn);
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background .25s, box-shadow .25s;
+        }
+
+        .nav-cta:hover {
+            background: var(--teal-hover);
+            box-shadow: var(--glow);
+        }
+
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .nav-hamburger span {
+            width: 24px;
+            height: 2px;
+            background: var(--white);
+            border-radius: 2px;
+            transition: .3s;
+        }
+
+        @media (max-width: 1024px) {
+            nav {
+                padding: 15px 30px;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                right: auto;
+                width: min(300px, 100%);
+                height: 100vh;
+                background: var(--surface);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding: 120px 40px 40px;
+                gap: 30px;
+                transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                border-right: 1px solid var(--border);
+                z-index: 999;
+                display: flex;
+                box-shadow: 20px 0 40px rgba(0, 0, 0, 0.5);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li { width: 100%; }
+            .nav-links a {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                font-size: 18px;
+                width: 100%;
+                padding: 10px 0;
+            }
+            .nav-links a i {
+                width: 24px;
+                color: var(--teal);
+                font-size: 16px;
+            }
+
+            .nav-hamburger {
+                display: flex;
+            }
+
+            .nav-hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .nav-hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .nav-hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            .nav-cta {
+                display: none;
+            }
+        }
+
+        /* ── ABOUT PAGE HERO ── */
+        .about-hero {
+            padding: 200px 60px 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(circle at center, rgba(0, 229, 216, 0.05) 0%, transparent 70%);
+        }
+
+        .about-hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(60px, 8vw, 120px);
+            color: var(--white);
+            line-height: 1;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .about-hero h1 span {
+            color: var(--teal);
+        }
+
+        .about-hero p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 18px;
+            color: var(--gray);
+        }
+
+        /* ── STORY SECTION ── */
+        .story-section {
+            padding: 100px 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .story-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            color: var(--white);
+            margin-bottom: 30px;
+        }
+
+        .story-content h2 span {
+            color: var(--teal);
+        }
+
+        .story-text {
+            font-size: 17px;
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .story-text p {
+            margin-bottom: 20px;
+        }
+
+        .story-visual {
+            position: relative;
+        }
+
+        .story-frame {
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            box-shadow: var(--card-shadow), var(--glow);
+            aspect-ratio: 1;
+            background: var(--surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ── VALUES GRID ── */
+        .values-section {
+            padding: 100px 60px;
+            background: var(--surface);
+        }
+
+        .values-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .value-card {
+            background: var(--bg);
+            padding: 40px;
+            border-radius: var(--radius-card);
+            border: 1px solid var(--border);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--teal);
+        }
+
+        .value-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 20px;
+            color: var(--teal);
+        }
+
+        .value-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: var(--white);
+            margin-bottom: 15px;
+        }
+
+        /* ── SPECIALIZATION SECTION ── */
+        .spec-section {
+            padding: 100px 60px;
+        }
+
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .spec-item {
+            text-align: center;
+        }
+
+        .spec-icon {
+            font-size: 40px;
+            color: var(--teal);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .spec-item h3 {
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 80px 60px 40px;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            letter-spacing: 3px;
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        .footer-logo span {
+            color: var(--teal);
+        }
+
+        .footer-tagline {
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.7;
+            max-width: 280px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .footer-social a {
+            width: 38px;
+            height: 38px;
+            background: rgba(0, 229, 216, 0.06);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: border-color .2s, background .2s, transform .2s;
+        }
+
+        .footer-social a:hover {
+            border-color: var(--teal);
+            background: rgba(0, 229, 216, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .footer-social svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--teal) !important;
+            fill: none !important;
+            stroke-width: 2;
+        }
+
+        .footer-col h4 {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-col a {
+            font-size: 14px;
+            color: var(--gray);
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .footer-col a:hover {
+            color: var(--teal);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-copy {
+            font-size: 13px;
+            color: var(--gray);
+        }
+
+        .footer-copy span {
+            color: var(--teal);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .footer-social a {
+            width: 38px;
+            height: 38px;
+            background: rgba(0, 229, 216, 0.06);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: border-color .2s, background .2s, transform .2s;
+        }
+
+        .footer-social a:hover {
+            border-color: var(--teal);
+            background: rgba(0, 229, 216, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .footer-social svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--teal) !important;
+            fill: none !important;
+            stroke-width: 2;
+        }
+
+        .footer-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--gray);
+            background: rgba(0, 229, 216, 0.06);
+            border: 1px solid rgba(0, 229, 216, 0.15);
+            border-radius: 99px;
+            padding: 6px 16px;
+        }
+
+        .footer-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--teal);
+            border-radius: 50%;
+            animation: pulse-ring 2s infinite;
+        }
+
+        /* ── UTILS ── */
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--sand);
+            margin-bottom: 20px;
+        }
+
+        .section-tag::before {
+            content: '';
+            width: 24px;
+            height: 1.5px;
+            background: var(--sand);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 1024px) {
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+
+            section,
+            .about-hero,
+            .story-section,
+            .values-section,
+            .spec-section,
+            footer {
+                padding: 60px 20px;
+            }
+
+            .about-hero {
+                padding-top: 140px;
+            }
+
+            .about-hero h1 {
+                font-size: 50px;
+            }
+
+            .story-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .story-content h2 {
+                font-size: 36px;
+            }
+
+            .section-tag {
+                font-size: 10px;
+                letter-spacing: 2px;
+            }
+
+            .values-grid,
+            .spec-grid,
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .footer-badge {
+                margin: 0 auto;
+            }
+
+            /* Responsive grid for 'Why Choose Us' */
+            [style*="grid-template-columns: repeat(2, 1fr)"] {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-hero h1 {
+                font-size: 40px;
+            }
+
+            .story-frame {
+                aspect-ratio: 4/3;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- NAVBAR -->
+    <nav id="navbar">
+        <a href="index.html" class="nav-logo">THE NEW<span>FUTURE</span>LEGEND</a>
+        <ul class="nav-links">
+            <li><a href="index.html#services"><i class="fas fa-hammer"></i> Services</a></li>
+            <li><a href="about.html" class="active"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="projects.html"><i class="fas fa-hard-hat"></i> Projects</a></li>
+            <li><a href="team.html"><i class="fas fa-users-cog"></i> Team</a></li>
+            <li><a href="contact.html"><i class="fas fa-phone-alt"></i> Contact</a></li>
+        </ul>
+        <a href="contact.html" class="nav-cta">Get a Quote</a>
+        <div class="nav-hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="about-hero">
+        <div class="section-tag">Since 2010</div>
+        <h1>Our <span>Legacy</span> of Excellence</h1>
+        <p>A story of passion, precision, and building the landmarks of tomorrow across the Sultanate of Oman.</p>
+    </header>
+
+    <!-- STORY -->
+    <section class="story-section">
+        <div class="story-content reveal">
+            <div class="section-tag">Who We Are</div>
+            <h2>Building <span>Dreams</span><br>For 14 Years</h2>
+            <div class="story-text">
+                <p><strong>The New Future Legend</strong> is a story traversing over 14 Years and today is one of the
+                    fastest-growing building business groups in <strong>Muscat, Oman</strong>.</p>
+                <p>With a focus on the builder of residential, Commercial and Government Projects to offer premium and
+                    luxury housing, we have constructed various projects in premium locations within the established
+                    areas of <strong>Muscat and Barka</strong>.</p>
+                <p>Our journey began with a simple vision: to provide uncompromised quality and engineering excellence
+                    to every client. Today, we stand as a symbol of trust and luxury in the Omani construction
+                    landscape.</p>
+            </div>
+        </div>
+        <div class="story-visual reveal">
+            <div class="story-frame">
+                <!-- SVG Illustration of a blueprint or construction symbol -->
+                <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="400" height="400" fill="#0D1117" />
+                    <g stroke="#2A2F36" stroke-width="1" fill="none">
+                        <path d="M50 50 L350 50 L350 350 L50 350 Z" />
+                        <path d="M50 50 L350 350 M350 50 L50 350" />
+                    </g>
+                    <rect x="120" y="120" width="160" height="160" fill="rgba(0,229,216,0.1)" stroke="var(--teal)"
+                        stroke-width="2" rx="10" />
+                    <circle cx="200" cy="200" r="40" fill="var(--teal)" opacity="0.2" />
+                    <path d="M180 200 L220 200 M200 180 L200 220" stroke="var(--teal)" stroke-width="2" />
+                    <text x="200" y="320" text-anchor="middle" font-family="'Bebas Neue'" font-size="24"
+                        fill="var(--white)">EST. 2010</text>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- SPECIALIZATIONS -->
+    <section class="spec-section">
+        <div style="text-align:center; margin-bottom: 60px;">
+            <div class="section-tag">Our Expertise</div>
+            <h2 style="font-family:'Playfair Display'; font-size:40px; color:var(--white);">Mastering the
+                <span>Craft</span></h2>
+        </div>
+        <div class="spec-grid reveal">
+            <div class="spec-item">
+                <span class="spec-icon"><i class="fas fa-building"></i></span>
+                <h3>New Building Work</h3>
+                <p>From foundations to final finishes, we specialize in constructing modern architectural marvels from
+                    the ground up.</p>
+            </div>
+            <div class="spec-item">
+                <span class="spec-icon"><i class="fas fa-paint-roller"></i></span>
+                <h3>Renovation</h3>
+                <p>Transforming existing spaces into contemporary masterpieces with our creative and technical
+                    renovation expertise.</p>
+            </div>
+            <div class="spec-item">
+                <span class="spec-icon"><i class="fas fa-tools"></i></span>
+                <h3>Maintenance</h3>
+                <p>Ensuring the longevity and performance of your structures with professional and timely maintenance
+                    services.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section style="padding: 100px 60px; text-align: center;">
+        <div class="reveal">
+            <div class="section-tag">The Legend Difference</div>
+            <h2 style="font-family:'Playfair Display'; font-size:44px; color:var(--white); margin-bottom: 40px;">Why
+                Choose <span>The New Future Legend?</span></h2>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; text-align: left;" class="reveal">
+            <div
+                style="background: var(--surface); padding: 30px; border-radius: 14px; border-left: 4px solid var(--teal);">
+                <h4 style="color:var(--white); margin-bottom: 10px;">Unmatched Premium Quality</h4>
+                <p style="font-size: 14px;">We use only the finest materials and employ master craftsmen to ensure every
+                    detail of your luxury housing project is perfect.</p>
+            </div>
+            <div
+                style="background: var(--surface); padding: 30px; border-radius: 14px; border-left: 4px solid var(--sand);">
+                <h4 style="color:var(--white); margin-bottom: 10px;">Strategic Locations</h4>
+                <p style="font-size: 14px;">Our projects are strategically located in the most sought-after areas of
+                    Muscat and Barka, ensuring high value and accessibility.</p>
+            </div>
+            <div
+                style="background: var(--surface); padding: 30px; border-radius: 14px; border-left: 4px solid var(--white);">
+                <h4 style="color:var(--white); margin-bottom: 10px;">Customer-Centric Focus</h4>
+                <p style="font-size: 14px;">We don't just build; we consult. We work closely with our clients to bring
+                    their specific visions of luxury to life.</p>
+            </div>
+            <div
+                style="background: var(--surface); padding: 30px; border-radius: 14px; border-left: 4px solid var(--teal);">
+                <h4 style="color:var(--white); margin-bottom: 10px;">Post-Construction Support</h4>
+                <p style="font-size: 14px;">Our relationship doesn't end at handover. We provide robust maintenance
+                    support to keep your building in pristine condition.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- VALUES -->
+    <section class="values-section">
+        <div class="values-header reveal">
+            <div class="section-tag">Our Values</div>
+            <h2 style="font-family:'Playfair Display'; font-size:44px; color:var(--white);">The Pillars of <span>Our
+                    Success</span></h2>
+        </div>
+        <div class="values-grid">
+            <div class="value-card reveal">
+                <div class="value-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                </div>
+                <h3>Integrity</h3>
+                <p>We believe in honest communication and transparent project management, ensuring our clients are never
+                    in the dark.</p>
+            </div>
+            <div class="value-card reveal">
+                <div class="value-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                </div>
+                <h3>Timeliness</h3>
+                <p>Time is of the essence. We pride ourselves on delivering complex projects on or before the agreed
+                    timeline.</p>
+            </div>
+            <div class="value-card reveal">
+                <div class="value-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon
+                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                    </svg>
+                </div>
+                <h3>Excellence</h3>
+                <p>Good isn't enough. We strive for absolute perfection in every brick laid and every beam installed.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="footer-logo">THE NEW <span>FUTURE</span> LEGEND</div>
+                <p class="footer-tagline">Building tomorrow's landmarks with today's precision. Premium construction
+                    since 2010.</p>
+                <div class="footer-social">
+                    <a href="#"><svg viewBox="0 0 24 24">
+                            <path
+                                d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg></a>
+                    <a href="#"><svg viewBox="0 0 24 24">
+                            <path
+                                d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
+                        </svg></a>
+                    <a href="#"><svg viewBox="0 0 24 24">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                        </svg></a>
+                    <a href="#"><svg viewBox="0 0 24 24">
+                            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+                        </svg></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="commercial.html">Commercial Construction</a></li>
+                    <li><a href="residential.html">Residential Projects</a></li>
+                    <li><a href="infrastructure.html">Infrastructure</a></li>
+                    <li><a href="smart-buildings.html">Smart Buildings</a></li>
+                    <li><a href="renovation.html">Renovation</a></li>
+                    <li><a href="consulting.html">Consulting</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="team.html">Our Team</a></li>
+                    <li><a href="projects.html">Portfolio</a></li>
+                    <li><a href="sustainability.html">Sustainability</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html">Terms of Service</a></li>
+                    <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                    <li><a href="compliance.html">Compliance</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="footer-copy">© 2024 <span>The New Future Legend</span>. All rights reserved.</p>
+            <div class="footer-badge">Licensed & Certified Builder</div>
+        </div>
+    </footer>
+
+    <script>
+        // CURSOR
+        const cursor = document.getElementById('cursor');
+        const ring = document.getElementById('cursorRing');
+        let mx = 0, my = 0, rx = 0, ry = 0;
+        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
+        function animateRing() { rx += (mx - rx) * 0.15; ry += (my - ry) * 0.15; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animateRing); }
+        animateRing();
+
+        // NAVBAR SCROLL
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        // MOBILE MENU TOGGLE
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
+        });
+
+        // Close menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // REVEAL ON SCROLL
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+
+</html>
