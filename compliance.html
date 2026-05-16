@@ -70,7 +70,9 @@
             text-decoration: none;
         }
 
-        .nav-logo span { color: var(--teal); }
+        .nav-logo span {
+            color: var(--teal);
+        }
 
         .nav-links {
             display: flex;
@@ -86,7 +88,9 @@
             transition: color .25s;
         }
 
-        .nav-links a:hover { color: var(--teal); }
+        .nav-links a:hover {
+            color: var(--teal);
+        }
 
         .nav-cta {
             padding: 10px 24px;
@@ -191,7 +195,10 @@
             margin-bottom: 15px;
         }
 
-        .comp-card p { font-size: 14px; margin-bottom: 20px; }
+        .comp-card p {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
 
         .comp-list {
             list-style: none;
@@ -237,9 +244,15 @@
             color: var(--white);
         }
 
-        .footer-logo span { color: var(--teal); }
+        .footer-logo span {
+            color: var(--teal);
+        }
 
-        .footer-tagline { font-size: 14px; color: var(--gray); margin-top: 10px; }
+        .footer-tagline {
+            font-size: 14px;
+            color: var(--gray);
+            margin-top: 10px;
+        }
 
         .footer-col h4 {
             font-size: 13px;
@@ -250,9 +263,23 @@
             margin-bottom: 20px;
         }
 
-        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-        .footer-col a { font-size: 14px; color: var(--gray); text-decoration: none; transition: color .2s; }
-        .footer-col a:hover { color: var(--teal); }
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-col a {
+            font-size: 14px;
+            color: var(--gray);
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .footer-col a:hover {
+            color: var(--teal);
+        }
 
         .footer-bottom {
             display: flex;
@@ -261,11 +288,19 @@
             border-top: 1px solid var(--border);
         }
 
-        .footer-copy { font-size: 13px; }
-        .footer-copy span { color: var(--teal); }
+        .footer-copy {
+            font-size: 13px;
+        }
+
+        .footer-copy span {
+            color: var(--teal);
+        }
 
         @media (max-width: 1024px) {
-            nav { padding: 15px 30px; }
+            nav {
+                padding: 15px 30px;
+            }
+
             .nav-links {
                 position: fixed;
                 top: 0;
@@ -283,11 +318,17 @@
                 border-right: 1px solid var(--border);
                 z-index: 999;
                 display: flex;
-                box-shadow: 20px 0 40px rgba(0,0,0,0.5);
+                box-shadow: 20px 0 40px rgba(0, 0, 0, 0.5);
             }
-            .nav-links.active { left: 0; }
 
-            .nav-links li { width: 100%; }
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
             .nav-links a {
                 display: flex;
                 align-items: center;
@@ -296,26 +337,60 @@
                 width: 100%;
                 padding: 10px 0;
             }
+
             .nav-links a i {
                 width: 24px;
                 color: var(--teal);
                 font-size: 16px;
             }
-            .nav-hamburger { display: flex; }
-            .nav-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-            .nav-hamburger.active span:nth-child(2) { opacity: 0; }
-            .nav-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-            
-            .nav-cta { display: none; }
-            .footer-top { grid-template-columns: 1fr 1fr; }
+
+            .nav-hamburger {
+                display: flex;
+            }
+
+            .nav-hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .nav-hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .nav-hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            .nav-cta {
+                display: none;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         @media (max-width: 768px) {
-            .comp-header { padding: 140px 20px 40px; }
-            .comp-container { padding: 0 20px; }
-            .comp-grid { grid-template-columns: 1fr; }
-            .footer-top { grid-template-columns: 1fr; }
-            .footer-bottom { flex-direction: column; text-align: center; gap: 20px; }
+            .comp-header {
+                padding: 140px 20px 40px;
+            }
+
+            .comp-container {
+                padding: 0 20px;
+            }
+
+            .comp-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -365,14 +440,18 @@
     <!-- CONTENT -->
     <main class="comp-container">
         <div style="text-align:center; margin-bottom: 60px;">
-            <p style="max-width:800px; margin:0 auto; font-size:18px;">At <strong>The New Future Legend</strong>, compliance isn't a checklist—it's the bedrock of our structural integrity and corporate reputation. We adhere to the most rigorous Omani and international benchmarks.</p>
+            <p style="max-width:800px; margin:0 auto; font-size:18px;">At <strong>The New Future Legend</strong>,
+                compliance isn't a checklist—it's the bedrock of our structural integrity and corporate reputation. We
+                adhere to the most rigorous Omani and international benchmarks.</p>
         </div>
 
         <div class="comp-grid">
             <!-- HSE Compliance -->
             <div class="comp-card">
                 <div class="comp-icon">
-                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
                 </div>
                 <h3>HSE Governance</h3>
                 <p>Prioritizing the health and safety of our workforce and the environmental health of our sites.</p>
@@ -387,7 +466,10 @@
             <!-- Quality Management -->
             <div class="comp-card">
                 <div class="comp-icon">
-                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M9 12l2 2 4-4" />
+                    </svg>
                 </div>
                 <h3>Quality Assurance</h3>
                 <p>Ensuring every OMR invested translates into precision-engineered structural excellence.</p>
@@ -402,7 +484,12 @@
             <!-- Ethical Conduct -->
             <div class="comp-card">
                 <div class="comp-icon">
-                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                        <path d="M16 3.13a4 4 0 010 7.75" />
+                    </svg>
                 </div>
                 <h3>Corporate Ethics</h3>
                 <p>Operating with uncompromised transparency and fairness in all stakeholder interactions.</p>
@@ -417,7 +504,9 @@
             <!-- Regulatory Alignment -->
             <div class="comp-card">
                 <div class="comp-icon">
-                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 7v14M21 7v14M9 21V11M15 21V11M3 7l9-4 9 4"/></svg>
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 21h18M3 7v14M21 7v14M9 21V11M15 21V11M3 7l9-4 9 4" />
+                    </svg>
                 </div>
                 <h3>Regulatory Strategy</h3>
                 <p>Navigating the complex Omani building codes and international construction standards.</p>
@@ -430,10 +519,18 @@
             </div>
         </div>
 
-        <section style="margin-top: 80px; text-align: center; padding: 60px; background: var(--surface); border-radius: 32px; border: 1px solid var(--border);">
-            <h2 style="font-family:'Playfair Display'; color:var(--white); margin-bottom: 20px;">Governance Oversight</h2>
-            <p style="max-width:700px; margin: 0 auto 30px;">Our dedicated Compliance Office performs monthly internal audits and maintains direct communication with Omani regulatory authorities to ensure project continuity and legal excellence.</p>
-            <p><strong>Compliance Officer:</strong> compliance@futurelegend.om</p>
+        <section
+            style="margin-top: 80px; text-align: center; padding: 60px; background: var(--surface); border-radius: 32px; border: 1px solid var(--border);">
+            <h2 style="font-family:'Playfair Display'; color:var(--white); margin-bottom: 20px;">Governance Oversight
+            </h2>
+            <p style="max-width:700px; margin: 0 auto 30px;">Our dedicated Compliance Office performs monthly internal
+                audits and maintains direct communication with Omani regulatory authorities to ensure project continuity
+                and legal excellence.</p>
+            <p><strong>Director:</strong> Ali Saleh Saif Almamari<br>
+                <strong>Email:</strong> ali.almamari4476@gmail.com<br>
+                <strong>Location:</strong> Muscat, Oman<br>
+                <strong>Phone:</strong> +968 95590060
+            </p>
         </section>
     </main>
 
@@ -476,7 +573,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p class="footer-copy">© 2024 <span>The New Future Legend</span>. All rights reserved.</p>
+            <p class="footer-copy">© 2026 <span>The New Future Legend</span>. All rights reserved.</p>
         </div>
     </footer>
 
